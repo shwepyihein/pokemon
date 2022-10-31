@@ -1,0 +1,14 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.container {
+  background: linear-gradient(180deg, rgba(248, 248, 248, 0) 0%, #fff 100%);
+  width: 100%;
+
+  bottom: 0;
+}
