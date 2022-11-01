@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { PokemonProvider } from '../context/pokemonContext';
+import Layout from '../layout';
 import './styles.css';
 
 function CustomApp({ Component, pageProps }: AppProps) {
@@ -9,7 +11,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Welcome to market!</title>
       </Head>
       <main className="app">
-        <Component {...pageProps} />
+        <PokemonProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </PokemonProvider>
       </main>
     </>
   );
