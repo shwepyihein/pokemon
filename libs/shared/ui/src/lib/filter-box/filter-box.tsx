@@ -12,9 +12,10 @@ function classNames(...classes: string[]) {
 /* eslint-disable-next-line */
 export interface FilterBoxProps {
   listData: any;
+  FetchFitler: (v: any) => void;
 }
 
-export function FilterBox({ listData }: FilterBoxProps) {
+export function FilterBox({ FetchFitler, listData }: FilterBoxProps) {
   const router = useRouter();
   const [typeList, setTypeList] = useState({
     q: '',
@@ -31,9 +32,10 @@ export function FilterBox({ listData }: FilterBoxProps) {
   }, [router.pathname]);
 
   const handleChange = (name: string, v: string) => {
-    const object = { ...typeList, [name]: v };
+    const object = { ...typeList, [name]: v.toLocaleLowerCase() };
     const newQUery = new URLSearchParams(object).toString();
     setTypeList(object);
+    FetchFitler(object);
     router.push(
       {
         pathname: router.pathname,

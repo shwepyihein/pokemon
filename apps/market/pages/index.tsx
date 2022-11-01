@@ -5,18 +5,56 @@ import {
   FilterBox,
 } from '@market/shared/ui';
 import Image from 'next/image';
-import { fetchCardList } from '../api/server';
+import { useEffect, useState } from 'react';
+import { fetchCardList, fetchQueryList } from '../api/server';
 import { usePokemon } from '../context/pokemonContext';
 import styles from './index.module.css';
 
 export const HomePage = ({ cardsList, data }) => {
   const pokemonContext = usePokemon();
-  console.log(pokemonContext, data);
+  const [cardListData, setCardListData] = useState([]);
+
+  const handleChange = async ({ q, rarity, type, subtype }) => {
+    let data = '';
+
+    if (q) {
+      data = `name:"${q.toLowerCase()}"`;
+    }
+    if (rarity) {
+      data = data
+        ? data + `rarity:"${rarity.toLowerCase()}"`
+        : `rarity:"${rarity.toLowerCase()}"`;
+    }
+    if (type) {
+      data = data
+        ? data + ` types:"${type.toLowerCase()}" `
+        : ` types:"${type.toLowerCase()}" `;
+    }
+    if (subtype) {
+      data = data
+        ? data + `subtypes:"${subtype.toLowerCase()}" `
+        : `subtypes:"${subtype.toLowerCase()}" `;
+    }
+    console.log(data);
+
+    try {
+      const d = await fetchQueryList(data);
+      console.log(d);
+      setCardListData(d.data);
+    } catch (e) {
+      console.log('da');
+    }
+  };
   /*  console.log(cardsList, data);
    * Replace the elements below with your own.
    *
    * Note: The corresponding styles are in the ./index.css file.
    */
+
+  useEffect(() => {
+    setCardListData(cardsList);
+  }, [cardsList]);
+
   return (
     <div className="mx-auto max-w-7xl py-12 ">
       <DialogBox
@@ -40,10 +78,13 @@ export const HomePage = ({ cardsList, data }) => {
         onClose={pokemonContext.setCheckoutDialog}
       />
       <div className="mx-auto max-w-lg mb-8">
-        <FilterBox listData={pokemonContext.listData} />
+        <FilterBox
+          FetchFitler={handleChange}
+          listData={pokemonContext.listData}
+        />
       </div>
       <CardList
-        cardListData={cardsList}
+        cardListData={cardListData}
         pokemonContext={pokemonContext}
         selectedCard={pokemonContext.selectedCard}
       />
@@ -52,13 +93,33 @@ export const HomePage = ({ cardsList, data }) => {
 };
 
 export const getServerSideProps = async ({
-  query: { rarity = 0, type, subtype },
+  query: { q, rarity, type, subtype },
 }: any) => {
-  console.log(rarity, type, subtype);
-  const filterQuery: any = [];
+  console.log(q, rarity, type, subtype);
+  let data = '';
 
+  if (q) {
+    data = `name:"${q.toLowerCase()}"`;
+  }
+  if (rarity) {
+    data = data
+      ? data + `rarity:"${rarity.toLowerCase()}"`
+      : `rarity:"${rarity.toLowerCase()}"`;
+  }
+  if (type) {
+    data = data
+      ? data + ` types:"${type.toLowerCase()}" `
+      : ` types:"${type.toLowerCase()}" `;
+  }
+  if (subtype) {
+    data = data
+      ? data + `subtypes:"${subtype.toLowerCase()}" `
+      : `subtypes:"${subtype.toLowerCase()}" `;
+  }
+  console.log(data);
   try {
-    const d = filterQuery.length === 0 ? await fetchCardList() : '';
+    const d = data ? await fetchQueryList(data) : await fetchCardList();
+
     return {
       props: {
         cardsList: d.data,

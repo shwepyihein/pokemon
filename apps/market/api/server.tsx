@@ -19,3 +19,9 @@ export const fetchCardList = () => {
 
   // Filter cards via query parameters
 };
+
+export const fetchQueryList = (q) => {
+  return pokemon.card.where({ q, pageSize: 25, page: 1 }).then((result) => {
+    return result;
+  });
+};

@@ -39,9 +39,9 @@ export const PokemonProvider = ({ children }: pokemonProviderProps) => {
 
     const [rarity, t, Subtype]: any = await Promise.all([p1, p2, p3]);
     setListData({
-      rarityList: rarity,
-      typeList: t,
-      subTypeList: Subtype,
+      rarityList: ['', ...rarity],
+      typeList: ['', ...t],
+      subTypeList: ['', ...Subtype],
     });
   };
 

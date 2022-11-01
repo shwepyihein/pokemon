@@ -39,17 +39,17 @@ export function Card(props: CardProps) {
         }}
         className="bg-white rounded-lg shadow-lg pt-7 pb-5 text-center"
       >
-        <p className="text-lg font-bold mb-1">{props.cardData.name}</p>
+        <p className="text-lg font-bold mb-1">{props.cardData?.name}</p>
         <p className="text-xs font-bold text-[#0F6DB0] mb-1">
-          {props.cardData.rarity}
+          {props.cardData?.rarity}
         </p>
         <div className="flex gap-10 justify-center mb-1">
-          <p>$ {props.cardData.cardmarket.prices.averageSellPrice}</p>
+          <p>$ {props.cardData?.cardmarket?.prices?.averageSellPrice}</p>
           <p>5 Left</p>
         </div>
       </div>
       <div className="text-center mt-[-18px]">
-        {handleCheck(props.cardData) ? (
+        {handleCheck(props?.cardData) ? (
           <button className="inline-flex items-center rounded-full border border-transparent bg-gray-900 px-8 py-2 text-xs font-medium text-white shadow-sm hover:bg-[#FDCE29">
             Selected
           </button>
@@ -59,7 +59,7 @@ export function Card(props: CardProps) {
               props.selectedCard({
                 img_url: props.cardData?.images?.small,
                 name: props.cardData.name,
-                price: props.cardData.cardmarket.prices.averageSellPrice,
+                price: props.cardData.cardmarket?.prices?.averageSellPrice,
                 card_type: props.cardData.rarity,
                 card_count: 1,
                 card_Left: 5,
