@@ -3,7 +3,7 @@ import { CartFooter } from './cart-footer';
 
 const Story: ComponentMeta<typeof CartFooter> = {
   component: CartFooter,
-  title: 'CartFooter',
+  title: 'Component/CartFooter',
 };
 export default Story;
 

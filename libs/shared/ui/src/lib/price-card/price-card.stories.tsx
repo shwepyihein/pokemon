@@ -3,7 +3,7 @@ import { PriceCard } from './price-card';
 
 const Story: ComponentMeta<typeof PriceCard> = {
   component: PriceCard,
-  title: 'PriceCard',
+  title: 'Component/PriceCard',
 };
 export default Story;
 

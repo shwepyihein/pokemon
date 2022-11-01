@@ -8,11 +8,14 @@ const Story: ComponentMeta<typeof Card> = {
 export default Story;
 
 const CardData = {
-  img_url: 'https://i.ibb.co/kqdnYh2/image-8.png',
+  images: { small: 'https://i.ibb.co/kqdnYh2/image-8.png' },
   name: 'Pokemon',
-  price: 24.9,
-  card_type: 'rarity',
-  Card_count: '3',
+  cardmarket: {
+    prices: {
+      averageSellPrice: 2.49,
+    },
+  },
+  rarity: 'rarity',
 };
 
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;

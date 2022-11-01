@@ -2,13 +2,6 @@ import styles from './card.module.css';
 
 /* eslint-disable-next-line */
 
-interface cardDataProps {
-  img_url: string;
-  name: string;
-  price: number;
-  card_type: string;
-  Card_count: string;
-}
 export interface CardProps {
   selected?: boolean;
   cardData: any;

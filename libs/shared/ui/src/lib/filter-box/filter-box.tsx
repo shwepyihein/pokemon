@@ -25,11 +25,11 @@ export function FilterBox({ FetchFitler, listData }: FilterBoxProps) {
   });
 
   useEffect(() => {
-    const query = router.query;
+    const query = router?.query;
     if (query) {
       setTypeList({ ...typeList, ...query });
     }
-  }, [router.pathname]);
+  }, [router]);
 
   const handleChange = (name: string, v: string) => {
     const object = { ...typeList, [name]: v.toLocaleLowerCase() };
