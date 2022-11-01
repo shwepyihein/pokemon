@@ -67,7 +67,7 @@ export const DialogBox = ({
                   <div className="absolute w-full bottom-[-15px] left-0">
                     <div
                       onClick={() => onClose(false)}
-                      className="w-[40px] h-[40px]  mx-auto rounded-lg bg-[#FD2928] flex items-center justify-center"
+                      className="w-[40px] h-[40px] cursor-pointer mx-auto rounded-lg bg-[#FD2928] flex items-center justify-center"
                     >
                       <XIcon className="flex-shrink-0  w-5 h-5  text-white" />
                     </div>

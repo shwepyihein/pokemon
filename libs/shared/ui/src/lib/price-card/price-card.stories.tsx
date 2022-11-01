@@ -12,7 +12,8 @@ const CardData = {
   name: 'Pokemon',
   price: 24.9,
   card_type: 'rarity',
-  Card_count: '3',
+  card_count: 3,
+  card_Left: 3,
 };
 
 const Template: ComponentStory<typeof PriceCard> = (args) => (
@@ -22,4 +23,7 @@ const Template: ComponentStory<typeof PriceCard> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   cardData: CardData,
+  updateCount: () => {
+    console.log(1);
+  },
 };

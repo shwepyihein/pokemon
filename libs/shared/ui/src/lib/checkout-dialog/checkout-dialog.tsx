@@ -6,58 +6,63 @@ import styles from './checkout-dialog.module.css';
 export interface CheckoutDialogProps {
   open: boolean;
   onClose: (v: boolean) => void;
+  pokemonContext?: any;
 }
 
-const cardArray = [
-  {
-    img_url: 'https://i.ibb.co/kqdnYh2/image-8.png',
-    name: 'Pokemon',
-    price: 24.9,
-    card_type: 'rarity',
-    Card_count: '3',
-  },
-  {
-    img_url: 'https://i.ibb.co/kqdnYh2/image-8.png',
-    name: 'Pokemon',
-    price: 24.9,
-    card_type: 'rarity',
-    Card_count: '3',
-  },
-  {
-    img_url: 'https://i.ibb.co/kqdnYh2/image-8.png',
-    name: 'Pokemon',
-    price: 24.9,
-    card_type: 'rarity',
-    Card_count: '3',
-  },
-  {
-    img_url: 'https://i.ibb.co/kqdnYh2/image-8.png',
-    name: 'Pokemon',
-    price: 24.9,
-    card_type: 'rarity',
-    Card_count: '3',
-  },
-];
-
-export function CheckoutDialog({ open = false, onClose }: CheckoutDialogProps) {
+export function CheckoutDialog({
+  open = false,
+  onClose,
+  pokemonContext,
+}: CheckoutDialogProps) {
+  const getTotalPrice = (v: any[]) => {
+    let data = 0;
+    for (let i = 0; i < v.length; i++) {
+      data = data + v[i].card_count * v[i].price;
+    }
+    return data;
+  };
+  const getCardCount = (v: any[]) => {
+    let data = 0;
+    for (let i = 0; i < v.length; i++) {
+      data = data + v[i].card_count;
+    }
+    return data;
+  };
   return (
     <div>
       <DialogBox open={open} onClose={onClose}>
-        {cardArray.map((item, i) => {
-          return <PriceCard cardData={item} key={i} />;
+        {pokemonContext?.checkoutList?.map((item: any, i: number) => {
+          return (
+            <PriceCard
+              cardData={item}
+              key={i}
+              updateCount={pokemonContext.updateCount}
+            />
+          );
         })}
         <div className={styles['container']}></div>
         <div>
           <div className="py-5 text-center">
-            <p className="text-xs text-gray-200 underline">clear all</p>
+            <p
+              className="text-xs cursor-pointer text-gray-200 underline"
+              onClick={pokemonContext.emptyList}
+            >
+              clear all
+            </p>
             <div className="grid grid-cols-2 gap-3 mx-auto py-2 max-w-[230px]">
               <p className="text-md font-medium">Total cards</p>
-              <p>2</p>
+              <p>{getCardCount(pokemonContext?.checkoutList)}</p>
               <p className="text-lg font-bold">Total Price</p>
-              <p>2</p>
+              <p>{getTotalPrice(pokemonContext?.checkoutList).toFixed(2)}</p>
             </div>
             <div>
-              <button className="inline-flex relative  items-center rounded-full  bg-[#298BFD] px-10 py-3 text-xs font-medium text-white  hover:bg-[#298BFD]">
+              <button
+                onClick={() => {
+                  pokemonContext.setCheckoutDialog(false);
+                  pokemonContext.setSuccessDialog(true);
+                }}
+                className=" cursor-pointer inline-flex relative  items-center rounded-full  bg-[#298BFD] px-10 py-3 text-xs font-medium text-white  hover:bg-[#298BFD]"
+              >
                 Pay Now
               </button>
             </div>

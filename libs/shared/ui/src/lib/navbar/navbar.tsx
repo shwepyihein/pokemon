@@ -6,8 +6,8 @@ export interface NavbarProps {}
 export function Navbar(props: NavbarProps) {
   return (
     <div>
-      <div className="mx-auto max-w-7xl border-0 border-b-1 bg-white shadow-md">
-        <div className="relative flex pb-6 pt-3 justify-center mx-auto text-center">
+      <div className="border-0 w-full border-b-1 bg-white shadow-md">
+        <div className="relative mx-auto max-w-7xl flex pb-6 pt-3 justify-center mx-auto text-center">
           <h1 className="text-4xl font-bold text-color-[#1D1C1C]">
             TCG Marketplace
           </h1>

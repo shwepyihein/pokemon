@@ -1,15 +1,25 @@
-import styles from './cart-footer.module.css';
+// import styles from './cart-footer.module.css';
 
 /* eslint-disable-next-line */
 export interface CartFooterProps {
   count: string;
+  handledialog: () => void;
 }
 
 export function CartFooter(props: CartFooterProps) {
   return (
-    <div className={styles['container']}>
-      <div className="flex justify-center items-center ">
-        <button className="inline-flex relative  items-center rounded-full border border-transparent bg-[#298BFD] px-8 py-2 text-xs font-medium text-white shadow-sm hover:bg-[#298BFD]">
+    <div
+      style={{
+        background:
+          'linear-gradient(180deg, rgba(248, 248, 248, 0) 0%, #fff 100%)',
+      }}
+      className="fixed bottom-0 w-full"
+    >
+      <div className="flex justify-center items-center pb-6 ">
+        <button
+          onClick={props.handledialog}
+          className="inline-flex relative  items-center rounded-full border border-transparent bg-[#298BFD] px-8 py-2 text-xs font-medium text-white shadow-sm hover:bg-[#298BFD]"
+        >
           <div className="absolute top-[-5px] left-[5px]  bg-red-900 w-4 h-4 rounded-full">
             {props.count}
           </div>
